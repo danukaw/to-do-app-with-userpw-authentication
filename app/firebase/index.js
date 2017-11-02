@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 try{
 
@@ -13,6 +13,7 @@ try{
 
 
   firebase.initializeApp(config);
+  firebase.auth().languageCode = 'it';
 
 } catch(e) {
   console.log('its unable to establish a connection with firebase', e);

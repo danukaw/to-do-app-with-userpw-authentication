@@ -35,11 +35,11 @@ var TodoAPI = {
     });
     // filter by searchText
     filteredTodo = filteredTodo.filter((todo)=>{
-        var toDoText = todo.task.toLowerCase();
+      //  var toDoText = todo.task.toLowerCase();
         /**if (todo.task.indexOf(searcTextLowerCase) >= 0) {
           return todo;
         }**/
-        return searchText.length === 0 || toDoText.indexOf(searchText) >= 0;
+        return searchText.length === 0 || todo.indexOf(searchText) >= 0;
 
     });
 

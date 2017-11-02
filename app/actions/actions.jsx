@@ -60,7 +60,7 @@ export var startToggleToDo = (id, completed) => {
       "completedAt" : completed ? moment().unix() : null
     }
     //var uid = getState().auth.uid;
-    var todosRef = firebaseRef.child('todos'+id);
+    var todosRef = firebaseRef.child(`todos/${id}`);
 
     return todosRef.update(updates).then(()=> {
       dispatch(updateTogleTodo(id, updates));
@@ -126,11 +126,35 @@ export var logout = () => {
 export var startLogin = () => {
   return (dispatch, getState) => {
 
+    firebase.auth().signInWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+    });
+      console.log('user have been signed in');
   }
 };
 
-export var startLogout = () => {
+export var startSignUp = () => {
   return (dispatch, getState) => {
 
+    firebase.auth().createUserWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
+  // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  // ...
+    });
+    console.log('user have been created');
+  }
+}
+
+export var startLogout = () => {
+  return (dispatch, getState) => {
+    firebase.auth().signOut().then(function() {
+      console.log('Sign-out successful');
+    }).catch(function(error) {
+      console.log('An error happened.');
+    });
   }
 };
