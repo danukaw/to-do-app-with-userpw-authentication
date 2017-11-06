@@ -123,28 +123,38 @@ export var logout = () => {
   }
 };
 
-export var startLogin = () => {
+export var startLogin = (phoneNumber, recapture) => {
   return (dispatch, getState) => {
 
-    firebase.auth().signInWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
+    /*firebase.auth().signInWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
-    });
-      console.log('user have been signed in');
-  }
+    });*/
+    firebase.auth().signInWithPhoneNumber(phoneNumber, recapture)
+        .then(function (confirmationResult) {
+          // SMS sent. Prompt user to type the code from the message, then sign the
+          // user in with confirmationResult.confirm(code).
+          window.confirmationResult = confirmationResult;
+        }).catch(function (error) {
+          // Error; SMS not sent
+          // ...
+        });
+
+          console.log('user have been signed in');
+      }
 };
 
 export var startSignUp = () => {
   return (dispatch, getState) => {
 
-    firebase.auth().createUserWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
+  //  firebase.auth().createUserWithEmailAndPassword('findosolution@gmail.com', '1qaz2wsx@').catch(function(error) {
   // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
+  //  var errorCode = error.code;
+  //  var errorMessage = error.message;
   // ...
-    });
+  //  });
     console.log('user have been created');
   }
 }
